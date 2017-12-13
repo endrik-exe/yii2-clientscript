@@ -1,0 +1,17 @@
+{
+    "name": "endrik-exe/yii2-clientscript",
+    "description": "Allow you to write javascript enclosed by <script> tag",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "Endrik Exe",
+            "email": "endrik.exe@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "endrik-exe\\yii2-clientscript\\": ""
+        }
+    }
+}
