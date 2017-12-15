@@ -30,12 +30,10 @@ class ClientScript {
     }
     
     /**
-     * @see {@link CClientScript::registerScript} id parameter
      * @var string
      */
     protected $id;
     /**
-     * @see {@link CClientScript::registerScript} position parameter
      * @var integer
      */
     protected $position;
