@@ -15,7 +15,20 @@ use yii\web\View;
  * <?php $clientScript->endScript(); ?>
  */
 class ClientScript {
-
+    
+    private static $singleton;
+    private static $lastId;
+    
+    public static function singleton()
+    {
+        if (self::$singleton == null)
+        {
+            self::$singleton = new ClientScript();
+        }
+        
+        return self::$singleton;
+    }
+    
     /**
      * @see {@link CClientScript::registerScript} id parameter
      * @var string
@@ -26,6 +39,8 @@ class ClientScript {
      * @var integer
      */
     protected $position;
+    
+    protected $script;
     
     /**
      * Begin script block
@@ -46,8 +61,15 @@ class ClientScript {
      * End script block, and register JS
      */
     public function endScript() {
-
-        $script = preg_replace('/\s*<\/?script(.*)>\s*/i', '', ob_get_clean());
-        Yii::$app->getView()->registerJs($script, $this->position, $this->id);
+        if (self::$lastId != null && self::$lastId == $this->id)
+        {
+            $this->script .= preg_replace('/\s*<\/?script(.*)>\s*/i', '', ob_get_clean());
+        } else
+        {
+            $this->script = preg_replace('/\s*<\/?script(.*)>\s*/i', '', ob_get_clean());
+        }
+        
+        Yii::$app->getView()->registerJs($this->script, $this->position, $this->id);
+        self::$lastId = $this->id;
     }
 }
