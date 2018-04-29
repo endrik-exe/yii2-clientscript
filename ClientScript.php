@@ -30,6 +30,25 @@ class ClientScript {
     }
     
     /**
+     * Begin script block
+     * 
+     * @param string $id
+     * @param constant $pos
+     */
+    public static function begin($id, $pos = VIEW::POS_READY)
+    {
+        self::singleton()->beginScript($id, $pos);
+    }
+
+    /**
+     * End script block, and register JS
+     */
+    public static function end()
+    {
+        self::singleton()->endScript();
+    }
+
+    /**
      * @var string
      */
     protected $id;
@@ -46,8 +65,8 @@ class ClientScript {
      * @param string $id
      * @param constant $pos
      */
-    public function beginScript($id, $pos = View::POS_READY) {
-
+    public function beginScript($id, $pos = View::POS_READY)
+    {
         $this->id = $id;
         $this->position = $pos;     
 
